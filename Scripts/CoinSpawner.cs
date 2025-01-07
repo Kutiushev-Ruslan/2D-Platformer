@@ -7,17 +7,15 @@ public class CoinSpawner : MonoBehaviour
     [SerializeField] private Transform[] _spawnPoints; // Все точки спавна
     [SerializeField] private int _initialCoinCount = 5; // Количество монет на старте
 
-    private List<Transform> _availableSpawnPoints = new List<Transform>(); // Свободные точки
-    private List<Rigidbody2D> _activeCoins = new List<Rigidbody2D>(); // Активные монеты
+    private List<Transform> _availableSpawnPoints = new List<Transform>();
+    private List<Rigidbody2D> _activeCoins = new List<Rigidbody2D>();
 
-    public int Counter = 0; // Счетчик собранных монет
+    public int Counter = 0;
 
     private void Awake()
     {
-        // Инициализируем список доступных точек
         _availableSpawnPoints = new List<Transform>(_spawnPoints);
 
-        // Спавним начальное количество монет
         for (int i = 0; i < _initialCoinCount; i++)
         {
             SpawnCoin();
