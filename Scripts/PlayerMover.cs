@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    private const string HorizontalAxis = "Horizontal";
+
     [SerializeField] private float moveSpeed = 5.5f;
     [SerializeField] private float jumpForce = 14f;
+    [SerializeField] private KeyCode _jumpButton = KeyCode.Space;
 
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -26,7 +29,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        float moveInput = Input.GetAxis("Horizontal");
+        float moveInput = Input.GetAxis(HorizontalAxis);
         _rigidbody.velocity = new Vector2(moveInput * moveSpeed, _rigidbody.velocity.y);
 
         if (moveInput > 0)
@@ -37,7 +40,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Jump()
     {
-        if (_groundDetector != null && _groundDetector.IsGrounded && Input.GetButtonDown("Jump"))
+        if (_groundDetector != null && _groundDetector.IsGrounded && Input.GetKeyDown(_jumpButton))
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpForce);
         }
